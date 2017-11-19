@@ -1,6 +1,7 @@
 package framework.core;
 
 import java.util.List;
+import java.util.Map;
 
 import framework.parsers.Bean;
 import framework.parsers.SaxParser;
@@ -8,8 +9,8 @@ import framework.parsers.SaxParser;
 public class XmlBeanDefinitionReader {
     
     public static enum ParserTypes {DOM, SAX, StAX};
-    
-    private List<Bean> beanList;
+
+    private Map<String,Bean> beanMap;
     private List<Bean> interceptorList;
     private ParserTypes parserType;
     private boolean validating;
@@ -19,8 +20,8 @@ public class XmlBeanDefinitionReader {
         validating = false;
     }
     
-    public List<Bean> getBeanList() {
-        return beanList;
+    public Map<String,Bean> getBeanMap() {
+        return beanMap;
     }
     
     public List<Bean> getInterceptorList() {
@@ -43,7 +44,7 @@ public class XmlBeanDefinitionReader {
         
         switch (parserType) {
             case SAX:
-                beanList = new SaxParser(fileName).getBeanList();
+                beanMap = new SaxParser(fileName).getBeanMap();
                 interceptorList = new SaxParser(fileName).getInterceptorList();
                 break;
             default:

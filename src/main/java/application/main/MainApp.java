@@ -7,15 +7,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 
-import application.classes.Bus;
-import application.classes.Car;
-import application.classes.GreetingService;
-import application.classes.Transport;
-import framework.core.Autowiring;
+import application.classes.*;
+import framework.core.annotations.Autowiring;
 import framework.core.BeanFactory;
 import framework.core.GenericXmlApplicationContext;
 import framework.core.Interceptor;
 import framework.core.XmlBeanDefinitionReader.ParserTypes;
+import framework.injection.interface_inj.MovieLister;
 
 public class MainApp {
     
@@ -198,14 +196,31 @@ public class MainApp {
         Transport bus2 = 
                 (Bus) factory.getBean("bus2", Transport.class);
         bus2.getTransport();
-        
+
         Transport car = 
                 (Car) factory.getBean("car", Transport.class);
         System.out.println(car.toString());
-        
-        //================
-        //================ REFLECTION API DEMO
-        //================
+
+        MovieLister lister = factory.getBean("MovieLister", MovieLister.class);
+
+        System.out.println(lister.getFinder().getClass());
+
+        System.out.println("================ Singleton DEMO ================");
+
+        System.out.println(((Car)car).getName());
+        ((Car) car).setName("I'm changed car");
+        Car car2 = factory.getBean("car", Car.class);
+        System.out.println(car2.getName());
+
+        System.out.println(((Bus)bus2).getMessage());
+        ((Bus)bus2).setMessage("I'm changed bus");
+        Bus busChanged = factory.getBean("bus2", Bus.class);
+        System.out.println(busChanged.getMessage());
+
+        Bike bike = factory.getBean(Bike.class.getCanonicalName(), Bike.class);
+        bike.getTransport();
+
+
         System.out.println();
         System.out.println("================ REFLECTION API DEMO ================");
         System.out.println();

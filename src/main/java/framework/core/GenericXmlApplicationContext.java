@@ -5,8 +5,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import framework.core.XmlBeanDefinitionReader.ParserTypes;
+import framework.core.annotations.Autowiring;
 
 public class GenericXmlApplicationContext {
+
+    private static final String CONFIG_FILE_NAME = GenericXmlApplicationContext.class.getResource("/GS_SpringXMLConfig.xml").getPath();
+
+    private final XmlBeanDefinitionReader reader;
+    private final BeanFactory beanFactory;
+    private String xmlFileLocation;
     
     private static class ConfigurationException extends RuntimeException {
         /**
@@ -28,17 +35,11 @@ public class GenericXmlApplicationContext {
         return testClass -> 
             anotherClass.getName().equals(testClass.getName());
     }
-    
-    private static final String CONFIG_FILE_NAME = GenericXmlApplicationContext.class.getResource("/GS_SpringXMLConfig.xml").getPath();
-    
-    private final XmlBeanDefinitionReader reader;
-    private final BeanFactory beanFactory;
-    
+
     public XmlBeanDefinitionReader getReader() {
         return reader;
     }
 
-    private String xmlFileLocation;    
     
     public GenericXmlApplicationContext() {
         this(CONFIG_FILE_NAME);        

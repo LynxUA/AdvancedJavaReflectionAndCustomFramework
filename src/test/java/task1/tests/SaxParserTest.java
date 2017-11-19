@@ -18,7 +18,7 @@ public class SaxParserTest {
     @Test
     public void testGetBeanList() {
         SaxParser tester = new SaxParser(xmlFilePath);
-        assertNotNull(tester.getBeanList());
+        assertNotNull(tester.getBeanMap());
     }
     
     @Test

@@ -1,10 +1,11 @@
 package framework.parsers;
 
 import java.util.List;
+import java.util.Map;
 
 public interface Parser {
     
-    public List<Bean> getBeanList();
+    public Map<String, Bean>getBeanMap();
     
     public String toString();     
     

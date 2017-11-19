@@ -3,10 +3,11 @@ package framework.parsers;
 import java.util.ArrayList;
 
 public class Bean {
-    String name;
-    String className;
-    ArrayList<String> constructorArg = new ArrayList<String>();
-    ArrayList<String> properties = new ArrayList<String>(); 
+    private String name;
+    private String className;
+    private ArrayList<String> constructorArg = new ArrayList<String>();
+    private ArrayList<String> properties = new ArrayList<String>();
+    private Scope scope = Scope.SINGLETON;
 
     public ArrayList<String> getProperties() {
         return properties;
@@ -27,7 +28,7 @@ public class Bean {
     public String toString() {
         return name + " : " + className.toString() + constructorArg.toString() + ", " + properties.toString();
     }
-    
+
     public String getName() {
         return name;
     }
@@ -42,5 +43,13 @@ public class Bean {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public Scope getScope() {
+        return scope;
+    }
+
+    public void setScope(Scope scope) {
+        this.scope = scope;
     }
 }

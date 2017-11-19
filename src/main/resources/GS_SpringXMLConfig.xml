@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <context:component-scan base-package="application.classes" />
 
   <bean id="greetingService" class="application.classes.GreetingServiceImpl">
 	<constructor-arg type="String" value="Hello World!" />	
@@ -12,7 +15,7 @@
 	<property name="message" value="Transport type is Bus" />
   </bean>
   
-  <bean id="bus2" class="application.classes.Bus"></bean>
+  <bean id="bus2" class="application.classes.Bus" scope="prototype"></bean>
   
   <bean id="car" class="application.classes.Car">
 	<constructor-arg value="Ferrari" />
@@ -22,6 +25,12 @@
   <interceptor id="interceptor1" class="application.classes.CapitalizingInterceptor"/>
  
   <interceptor id="interceptor2" class="application.classes.LowerCasingInterceptor"/>
+
+    <bean id="MovieLister" class="framework.injection.interface_inj.MovieLister"></bean>
+
+    <bean id="MovieFinder" class="framework.injection.interface_inj.injectors.ColonMovieFinder"></bean>
+
+    <bean id="FilenameFinder" class="framework.injection.interface_inj.injectors.FinderFilenameInjector"></bean>
 
   
   
